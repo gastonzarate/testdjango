@@ -1,0 +1,10 @@
+-r base.txt
+
+gunicorn==20.0.4
+dj-database-url==0.4.1
+
+# Static files
+django-storages[boto3]==1.10
+
+# Email
+django-anymail[mailgun]==7.2.1

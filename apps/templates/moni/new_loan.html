@@ -1,0 +1,83 @@
+{% extends 'base_landing.html' %}
+{%load static%}
+
+{%block menu_list%}
+    <li><a href="{% url 'users:login' %}" >Iniciar Sesion</a></li>
+{%endblock%}
+
+{%block content%}
+<div class="row row-bottom-padded-md loan-form">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 to-animate">
+        <img src="{% static 'img/moni-acostada.png'%}" width=300 alt="Moni">
+        
+        <h2>¡Pedime tu prestamo online!</h2>
+        <form id="form">
+            <div class="form-group ">
+                <label for="first_name_id" class="sr-only">Nombre</label>
+                <input id="first_name_id" name="first_name" class="form-control rounded" placeholder="Nombre" type="text" required>
+            </div>
+            <div class="form-group ">
+                <label for="last_name_id" class="sr-only">Apellido</label>
+                <input id="last_name_id" name="last_name" class="form-control" placeholder="Apellido" type="text" required>
+            </div>
+            <div class="form-group ">
+                <label for="email_id" class="sr-only">Email</label>
+                <input id="email_id" name="email" class="form-control" placeholder="Email" type="email" required>
+            </div>
+            <div class="form-group ">
+                <label for="dni_id" class="sr-only">DNI</label>
+                <input id="dni_id" name="dni" class="form-control" placeholder="DNI" type="number" min=1000000 max=100000000 required>
+            </div>
+            <div class="form-group ">
+                <label for="gender_id" class="sr-only">Sexo</label>
+                <select name="gender" id="gender_id" class="form-control"></select>
+            </div>
+            <div class="form-group ">
+                <label for="amount_id" class="sr-only">Prestamo</label>
+                <input id="amount_id" name="amount" class="form-control" placeholder="$65000" type="number" min=1 max=65000 required>
+            </div>
+            <p class="text-danger text-bold error"></p>
+            <div class="form-group ">
+                <button class="btn btn-primary btn-lg btn-loan">¡Prestame Moni!</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<div class="row row-bottom-padded-md loan-result">
+    <div class="loan-waiting sr-only">
+        <h1>Estoy evaluando tu pedido</h1>
+        <p>En un momento te voy a decir si se aprovó el préstamo.</p>
+        <div id="loader"></div>
+    </div>
+    <div class="loan-aprroved sr-only">
+        <h1>¡Felicitaciones!</h1>
+        <p>Tu préstamo ha sido preaprovado, me voy a comunicar con vos a <span class="email"></span>.</p>
+        <button class="btn btn-primary btn-lg btn-new-loan">Solitar Otro prestamo</button>
+    </div>
+    <div class="loan-rejected sr-only">
+        <h1>Lo siento tu préstamo no ha sido preaprovado</h1>
+        <p>No te rindas, estaré revisando si me salte algo y me comunicare con vos a <span class="email"></span.></p>
+        <button class="btn btn-primary btn-lg btn-new-loan">Solitar Otro prestamo</button>
+    </div>
+    <div class="loan-error sr-only">
+        <h1>Ocurrió un error</h1>
+        <p>Estaré revisando si me salte algo y me comunicare con vos a <span class="email"></span.></p>
+        <button class="btn btn-primary btn-lg btn-new-loan">Solitar Otro prestamo</button>
+    </div>
+</div>
+{%endblock%}
+
+{%block javascript%}
+    <script src="{% static 'js/moni/list_genders.js'%}"
+        id="list-genders-script"
+        data-url-genders="{%url 'moni:genders-list' %}">
+    </script>
+
+    <script src="{% static 'js/moni/new_loan.js'%}"
+        id="new-loan-script"
+        data-url-loan="{%url 'moni:loans-list' %}"
+        data-url-genders="{%url 'moni:genders-list' %}">
+    </script>
+{%endblock%}
+	
